@@ -1,0 +1,27 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: mainnet
+    source:
+      address: "0x0F8e03A2175184228A429A118653D068F3a0Bb35"
+      abi: Contract
+      startBlock: 17027962
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Initialized
+        - Voted
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: Voted(address,uint256,indexed address,address,indexed bytes32,uint256,indexed address)
+          handler: handleVoted
+      file: ./src/contract.ts
