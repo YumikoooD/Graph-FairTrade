@@ -1,6 +1,7 @@
 import requests
 # pretty print is used to print the output in the console in an easy to read format
 from pprint import pprint
+import mysql.connector
 
 API_KEY = "dec9470f53568776e096e1223bb00400"
 
@@ -40,7 +41,6 @@ for i in range(3):
 
     result = run_query(query)
     
-
 # print the results
 print('Print Result - {}'.format(result))
 print('#############')

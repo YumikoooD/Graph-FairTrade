@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS grants;
+use grants;
+
 create table 
     votes (
         id text primary key
