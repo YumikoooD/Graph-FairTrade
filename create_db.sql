@@ -1,28 +1,30 @@
-CREATE DATABASE IF NOT EXISTS grants;
-use grants;
+CREATE DATABASE IF NOT EXISTS graph;
+USE graph;
 
-create table 
-    votes (
-        id text primary key
-        transaction text
-        block_number bigint
-        block_timestamp timestamp with time zone default timezone ('utc'::text, now()) not null
-        project_id text
-        application_index int
-        round_address text
-        voter text
-        grant_address text
-        token text
-        amount bigint
-        amount_usd money
-    )
+DROP TABLE IF EXISTS votes;
+DROP TABLE IF EXISTS contributions;
 
-create table
-    contributions (
-        id text primary key,
-        project_id text,
-        wallet_id text,
-        amount_contributed_usd money,
-        created_at timestamp with time zone default timezone ('utc'::text, now()) not null,
-        updated_at timestamp with time zone default timezone ('utc'::text, now()) not null
-    );
+CREATE TABLE votes (
+    id VARCHAR(255) primary key,
+    transactionHash text,
+    blockNumber int,
+    blockTimestamp datetime default current_timestamp not null,
+    projectId text,
+    applicationIndex int,
+    roundAddress text,
+    voter text,
+    grantAddress text,
+    token text,
+    amount decimal(40),
+    amountUsd decimal(19, 4)
+);
+
+CREATE TABLE contributions (
+    id VARCHAR(255) primary key,
+    projectId text,
+    walletId text,
+    amountContributedUsd decimal(19, 4),
+    createdAt datetime default current_timestamp not null,
+    updatedAt datetime default current_timestamp not null
+);
+
